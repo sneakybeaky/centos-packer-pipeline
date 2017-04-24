@@ -1,0 +1,28 @@
+---
+driver:
+  name: ec2
+  aws_ssh_key_id: aws-eu-west
+  region: eu-west-2
+  instance_type: m4.large
+  associate_public_ip: true
+
+transport:
+  ssh_key: /Users/jon/.ssh/aws-eu-west
+  connection_timeout: 10
+  connection_retries: 5
+  username: centos  
+
+provisioner:
+  name: chef_zero  
+
+platforms:
+  - name: centos-7
+    driver:
+      image_search:
+        owner-id: 812657389421
+        name: CentOS Linux 7 x86_64*
+
+suites:
+  - name: server
+    run_list:
+    attributes:
