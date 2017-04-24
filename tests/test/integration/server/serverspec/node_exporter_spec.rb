@@ -17,4 +17,16 @@ describe "Node Exporter" do
     end
   end
 
+  context "http connection" do
+    subject {command('curl http://localhost:9100/metrics')}
+
+    it "is listening" do
+      expect(subject.exit_status).to eq 0
+    end
+
+    it "lists metrics" do
+      expect(subject.stdout).to contain 'go_gc_duration'
+    end
+  end  
+
 end
