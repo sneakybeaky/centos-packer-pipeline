@@ -21,6 +21,11 @@
     "ssh_username": "centos",
     "ami_name": "CentOS Linux 7 x86_64 HVM EBS {{isotime | clean_ami_name}}"
   }],
+  "provisioners": [{
+        "type": "shell",
+        "execute_command": "echo | sudo -S sh -c '{{ .Vars }} {{ .Path }}'",
+        "scripts": ["scripts/install_node_exporter.sh"]
+  }],
   "post-processors": [{
       "type": "manifest"
    }]
