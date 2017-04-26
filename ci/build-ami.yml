@@ -6,9 +6,9 @@ image_resource:
   source: {repository: ubuntu}
 
 inputs:
-- name: packer-centos
+- name: centos-packer
 - name: node-exporter-release
 
 run:
-  path: ./packer-centos/ci/scripts/ami-build
+  path: ./centos-packer/ci/scripts/ami-build
 
