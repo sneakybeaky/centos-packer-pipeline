@@ -4,3 +4,4 @@
 set -e -x
 
 echo "Hello there"
+ls -al node-exporter-release

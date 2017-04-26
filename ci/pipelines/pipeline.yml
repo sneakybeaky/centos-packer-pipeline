@@ -1,0 +1,24 @@
+resources:
+- name: node-exporter-release
+  type: github-release
+  source:
+    owner: prometheus
+    repository: node_exporter
+
+- name: packer-centos
+  type: git
+  source:
+    uri: https://github.com/sneakybeaky/centos-packer-pipeline.git
+    branch: master    
+
+jobs:
+- name: build-ami
+  plan:
+  - get: packer-centos
+  - get: node-exporter-release
+    params:
+      globs: 
+        - "*linux-amd64.tar.gz"
+        
+  - task: build
+    file: packer-centos/ci/build-ami.yml
