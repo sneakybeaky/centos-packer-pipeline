@@ -8,7 +8,8 @@ mkdir -p /opt/prometheus/node_exporter
 
 cd /opt/prometheus/node_exporter
 
-curl -sL https://github.com/prometheus/node_exporter/releases/download/v0.14.0/node_exporter-0.14.0.linux-amd64.tar.gz --output node_exporter.tgz
+mv /tmp/node-exporter-release/node_exporter-*.linux-amd64.tar.gz node_exporter.tgz
+rm -rf  /tmp/node-exporter-release
 
 tar xzvf node_exporter.tgz --strip 1
 
@@ -27,3 +28,4 @@ EOF
 systemctl daemon-reload
 systemctl enable node_exporter.service
 systemctl start node_exporter.service
+

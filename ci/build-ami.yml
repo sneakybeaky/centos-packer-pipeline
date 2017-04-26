@@ -3,11 +3,18 @@ platform: linux
 
 image_resource:
   type: docker-image
-  source: {repository: ubuntu}
+  source: {repository: hashicorp/packer}
+
+params:
+  AWS_ACCESS_KEY_ID: 
+  AWS_SECRET_ACCESS_KEY: 
 
 inputs:
 - name: centos-packer
 - name: node-exporter-release
+
+outputs:
+- name: packer-build
 
 run:
   path: ./centos-packer/ci/scripts/ami-build

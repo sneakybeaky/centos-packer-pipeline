@@ -3,5 +3,9 @@
 
 set -e -x
 
-echo "Hello there"
-find .
+mkdir -p packer-build
+
+pushd packer-build
+    ls -al ..
+    packer build ../centos-packer/packer/centos.json
+popd
