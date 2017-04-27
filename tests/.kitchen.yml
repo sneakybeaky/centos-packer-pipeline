@@ -1,13 +1,12 @@
 ---
 driver:
   name: ec2
-  aws_ssh_key_id: aws-eu-west
   region: eu-west-2
   instance_type: m4.large
   associate_public_ip: true
 
 transport:
-  ssh_key: /Users/jon/.ssh/aws-eu-west
+  ssh_key: <%= ENV['SSH_KEY_PATH'] %>
   connection_timeout: 10
   connection_retries: 5
   username: centos  

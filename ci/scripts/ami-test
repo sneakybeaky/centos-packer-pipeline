@@ -1,0 +1,15 @@
+#!/bin/bash
+# vim: set ft=sh
+
+set -e
+
+mkdir -p ${HOME}/.ssh
+printf "%s\n" $SSH_KEY > ${HOME}/.ssh/test_kitchen
+chmod -R 600 ${HOME}/.ssh
+export SSH_KEY_PATH=${HOME}/.ssh/test_kitchen
+
+set -x
+
+cd centos-packer/tests
+bundle install
+bundle exec kitchen test -l debug
