@@ -15,10 +15,21 @@ jobs:
 - name: build-ami
   plan:
   - get: centos-packer
+    trigger: true
   - get: node-exporter-release
+    trigger: true
     params:
       globs: 
         - "*linux-amd64.tar.gz"
         
   - task: build
     file: centos-packer/ci/build-ami.yml
+    params:
+      AWS_ACCESS_KEY_ID: {{aws_access_key_id}}
+      AWS_SECRET_ACCESS_KEY: {{aws_secret_access_key}}    
+  - task: test
+    file: centos-packer/ci/test-ami.yml  
+    params:
+      AWS_ACCESS_KEY_ID: {{aws_access_key_id}}
+      AWS_SECRET_ACCESS_KEY: {{aws_secret_access_key}}        
+     
