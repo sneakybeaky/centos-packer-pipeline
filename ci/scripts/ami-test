@@ -1,15 +1,18 @@
 #!/bin/bash
 # vim: set ft=sh
 
-set -e
-
-mkdir -p ${HOME}/.ssh
-printf "%s\n" $SSH_KEY > ${HOME}/.ssh/test_kitchen
-chmod -R 600 ${HOME}/.ssh
-export SSH_KEY_PATH=${HOME}/.ssh/test_kitchen
-
 set -x
 
+export AWS_SSH_KEY_ID=TestKitchen
+
+aws ec2 create-key-pair --region eu-west-2 --key-name ${AWS_SSH_KEY_ID} --query 'KeyMaterial' --output text > ${HOME}/test_kitchen.pem || exit 1
+chmod 400 ${HOME}/test_kitchen.pem
+export SSH_KEY_PATH=${HOME}/test_kitchen.pem
+
 cd centos-packer/tests
-bundle install
-bundle exec kitchen test -l debug
+kitchen test
+ret_code=$?
+
+aws ec2 delete-key-pair --region eu-west-2 --key-name ${AWS_SSH_KEY_ID}
+
+exit $ret_code
