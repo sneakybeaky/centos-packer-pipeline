@@ -21,15 +21,19 @@ jobs:
     params:
       globs: 
         - "*linux-amd64.tar.gz"
-        
   - task: build
     file: centos-packer/ci/build-ami.yml
     params:
       AWS_ACCESS_KEY_ID: {{aws_access_key_id}}
-      AWS_SECRET_ACCESS_KEY: {{aws_secret_access_key}}    
+      AWS_SECRET_ACCESS_KEY: {{aws_secret_access_key}}  
+
+- name: test-ami
+  plan:
+  - get: centos-packer
+    trigger: true
+    passed: [build-ami]    
   - task: test
     file: centos-packer/ci/test-ami.yml  
     params:
       AWS_ACCESS_KEY_ID: {{aws_access_key_id}}
-      AWS_SECRET_ACCESS_KEY: {{aws_secret_access_key}}        
-     
+      AWS_SECRET_ACCESS_KEY: {{aws_secret_access_key}}

@@ -10,7 +10,6 @@ params:
   AWS_SECRET_ACCESS_KEY: 
 
 inputs:
-- name: packer-build
 - name: centos-packer
 
 run:
