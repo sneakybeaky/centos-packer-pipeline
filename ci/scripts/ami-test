@@ -3,7 +3,8 @@
 
 set -x
 
-export AWS_SSH_KEY_ID=TestKitchen
+RND=`date +%s`
+export AWS_SSH_KEY_ID=TestKitchen_${RND}
 
 aws ec2 create-key-pair --region eu-west-2 --key-name ${AWS_SSH_KEY_ID} --query 'KeyMaterial' --output text > ${HOME}/test_kitchen.pem || exit 1
 chmod 400 ${HOME}/test_kitchen.pem
