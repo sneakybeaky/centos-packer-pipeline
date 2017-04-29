@@ -17,7 +17,7 @@ provisioner:
 platforms:
   - name: centos-7
     driver:
-      iimage_id: <%= ENV['AMI_ID'] %>
+      image_id: <%= ENV['AMI_ID'] %>
 
 suites:
   - name: server
