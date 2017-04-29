@@ -3,7 +3,6 @@
 
 set -e -x
 
-env 
 pushd centos-packer/packer
     packer build centos.json
 popd
