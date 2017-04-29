@@ -11,7 +11,7 @@ params:
 
 inputs:
 - name: centos-packer
-- name: built-artifact
+- name: packer-manifest
 
 run:
   path: ./centos-packer/ci/scripts/ami-test

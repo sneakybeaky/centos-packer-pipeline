@@ -3,8 +3,8 @@
 
 set -x
 
-export AMI_ID=`jq --raw-output '.builds[0].artifact_id | split(":")[1]' < built-artifact/packer-manifest.json`
-export AWS_REGION==`jq --raw-output '.builds[0].artifact_id | split(":")[0]' < built-artifact/packer-manifest.json`
+export AMI_ID=`jq --raw-output '.builds[0].artifact_id | split(":")[1]' < packer-manifest/packer-manifest.json`
+export AWS_REGION==`jq --raw-output '.builds[0].artifact_id | split(":")[0]' < packer-manifest/packer-manifest.json`
 
 RND=`date +%s`
 export AWS_SSH_KEY_ID=TestKitchen_${RND}
