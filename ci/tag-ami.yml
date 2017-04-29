@@ -1,0 +1,18 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source: {repository: xueshanf/awscli}
+
+params:
+  AWS_ACCESS_KEY_ID: 
+  AWS_SECRET_ACCESS_KEY: 
+
+inputs:
+- name: centos-packer
+- name: packer-manifest
+
+run:
+  path: ./centos-packer/ci/scripts/ami-tag
+

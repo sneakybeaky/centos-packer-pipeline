@@ -50,3 +50,16 @@ jobs:
     params:
       AWS_ACCESS_KEY_ID: {{aws_access_key_id}}
       AWS_SECRET_ACCESS_KEY: {{aws_secret_access_key}}
+
+- name: tag-ami
+  plan:
+  - get: centos-packer
+    passed: [test-ami]    
+  - get: packer-manifest
+    trigger: true
+    passed: [test-ami]    
+  - task: tag
+    file: centos-packer/ci/tag-ami.yml  
+    params:
+      AWS_ACCESS_KEY_ID: {{aws_access_key_id}}
+      AWS_SECRET_ACCESS_KEY: {{aws_secret_access_key}}      
