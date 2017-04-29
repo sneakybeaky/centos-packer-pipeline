@@ -11,6 +11,14 @@ resources:
     uri: https://github.com/sneakybeaky/centos-packer-pipeline.git
     branch: master    
 
+- name: packer-manifest
+  type: s3
+  source:
+    bucket: ami-pipeline-artifacts.ninedemons.io
+    versioned_file: base-ami/packer-manifest.json
+    access_key_id: {{s3-access-key-id}}
+    secret_access_key: {{s3-secret-access-key}}    
+
 jobs:
 - name: build-ami
   plan:
@@ -26,10 +34,14 @@ jobs:
     params:
       AWS_ACCESS_KEY_ID: {{aws_access_key_id}}
       AWS_SECRET_ACCESS_KEY: {{aws_secret_access_key}}  
+  - put: packer-manifest
+    params: {file: built-artifact/packer-manifest.json}
 
 - name: test-ami
   plan:
   - get: centos-packer
+    passed: [build-ami]    
+  - get: packer-manifest
     trigger: true
     passed: [build-ami]    
   - task: test

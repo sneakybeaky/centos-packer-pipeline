@@ -3,5 +3,9 @@
 
 set -e -x
 
-cd centos-packer/packer
-packer build centos.json
+env 
+pushd centos-packer/packer
+    packer build centos.json
+popd
+
+cp  centos-packer/packer/packer-manifest.json built-artifact/packer-manifest.json

@@ -13,6 +13,9 @@ inputs:
 - name: centos-packer
 - name: node-exporter-release
 
+outputs:
+- name: built-artifact
+
 run:
   path: ./centos-packer/ci/scripts/ami-build
 

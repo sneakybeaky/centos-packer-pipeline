@@ -1,7 +1,7 @@
 ---
 driver:
   name: ec2
-  region: eu-west-2
+  region: <%= ENV['AWS_REGION'] %>
   instance_type: m4.large
   associate_public_ip: true
 
@@ -17,9 +17,7 @@ provisioner:
 platforms:
   - name: centos-7
     driver:
-      image_search:
-        owner-id: 812657389421
-        name: CentOS Linux 7 x86_64*
+      iimage_id: <%= ENV['AMI_ID'] %>
 
 suites:
   - name: server
