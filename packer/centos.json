@@ -24,13 +24,13 @@
   "provisioners": [
     {
       "destination": "/tmp/",
-      "source": "../node-exporter-release",
+      "source": "../../node-exporter-release",
       "type": "file"
     },    
     {
         "type": "shell",
         "execute_command": "echo | sudo -S sh -c '{{ .Vars }} {{ .Path }}'",
-        "scripts": ["../centos-packer/packer/scripts/install_node_exporter.sh"]
+        "scripts": ["scripts/install_node_exporter.sh"]
   }
   ],
   "post-processors": [{
