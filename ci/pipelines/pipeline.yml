@@ -16,6 +16,7 @@ resources:
   source:
     bucket: ami-pipeline-artifacts.ninedemons.io
     versioned_file: base-ami/packer-manifest.json
+    region_name: eu-west-2
     access_key_id: {{s3-access-key-id}}
     secret_access_key: {{s3-secret-access-key}}    
 
