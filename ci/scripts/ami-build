@@ -3,5 +3,5 @@
 
 set -e -x
 
-cd centos-packer
-packer /packer/centos.json
+cd centos-packer/packer
+packer build centos.json
