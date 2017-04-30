@@ -12,6 +12,7 @@ params:
 inputs:
 - name: centos-packer
 - name: node-exporter-release
+- name: centos-ami 
 
 outputs:
 - name: built-artifact

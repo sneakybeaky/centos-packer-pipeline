@@ -1,4 +1,25 @@
+resource_types:
+- name: ami
+  type: docker-image
+  source:
+    repository: jdub/ami-resource
+
 resources:
+- name: centos-ami
+  type: ami
+  check_every: 1h
+  source:
+    aws_access_key_id: {{aws_access_key_id}}
+    aws_secret_access_key: {{aws_secret_access_key}}
+    region: eu-west-2
+    filters:
+      owner-id: "410186602215"
+      is-public: true
+      state: available
+      name: CentOS Linux 7*
+      root-device-type: ebs
+      virtualization-type: hvm   
+
 - name: node-exporter-release
   type: github-release
   source:
@@ -23,6 +44,8 @@ resources:
 jobs:
 - name: build-ami
   plan:
+  - get: centos-ami
+    trigger: true  
   - get: centos-packer
     trigger: true
   - get: node-exporter-release
